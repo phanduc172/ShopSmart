@@ -10,6 +10,16 @@ class Styles {
       cardColor: isDarkTheme
         ? const Color.fromARGB(255, 13, 6, 37)
           : AppColors.lightScaffoldColor,
+      brightness: isDarkTheme ? Brightness.dark: Brightness.light,
+      appBarTheme: AppBarTheme(
+        backgroundColor: isDarkTheme
+            ? AppColors.darkScaffoldColor
+            : AppColors.lightScaffoldColor,
+        elevation: 10,
+        titleTextStyle: TextStyle(
+          color: isDarkTheme? Colors.white : Colors.black,
+        ),
+      )
     );
   }
 }
