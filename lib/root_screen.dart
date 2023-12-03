@@ -48,7 +48,7 @@ class _RootScreenState extends State<RootScreen> {
         },
         destinations: [
           NavigationDestination(
-            selectedIcon: Icon(IconlyBold.home),
+              selectedIcon: Icon(IconlyBold.home),
               icon: Icon(IconlyLight.home),
               label: "Home"),
           NavigationDestination(
