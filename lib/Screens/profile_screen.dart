@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_smart/services/assets_manager.dart';
+import 'package:shop_smart/widgets/app_name_text.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/title_text.dart';
@@ -15,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Image.asset(AssetsManager.shoppingCart),
-        title: const Text("Profile Screen"),
+        title: const AppNameTextWidget(fontSize: 30,),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -48,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         image: DecorationImage(
                           image: const NetworkImage(
-                              "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/368888831_1405741093316117_1025392992405696762_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEmxWhINpsNSdr80Y-CtUhKM0RNmvTQ_aIzRE2a9ND9ovpNPE6u9U11qU3j48tas8lyTWy22OMimkytXRlJKllk&_nc_ohc=72jy3y4LqZMAX8CoJIU&_nc_ht=scontent.fsgn2-9.fna&oh=00_AfAFKh6WA-_jtWFRa9VTI1HGVq76AfZ3S6IcGXn96prDTA&oe=656D17DD"),
+                              "https://scontent.fdad1-4.fna.fbcdn.net/v/t39.30808-6/368888831_1405741093316117_1025392992405696762_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEmxWhINpsNSdr80Y-CtUhKM0RNmvTQ_aIzRE2a9ND9ovpNPE6u9U11qU3j48tas8lyTWy22OMimkytXRlJKllk&_nc_ohc=zC3SSIQefTcAX8r5_N3&_nc_ht=scontent.fdad1-4.fna&oh=00_AfDswggms_r5XxqQPqp_xLfabt-lgdoJZcDP0IpL9LxP7A&oe=6573069D"),
                           fit: BoxFit.fill,
                         ),
                       ),

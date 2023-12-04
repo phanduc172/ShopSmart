@@ -14,7 +14,7 @@ class RootScreen extends StatefulWidget {
 
 class _RootScreenState extends State<RootScreen> {
   late List<Widget> screens;
-  int currentScreen = 3;
+  int currentScreen = 2;
   late PageController controller;
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _RootScreenState extends State<RootScreen> {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentScreen,
-        elevation: 10,
+        elevation: 15,
         height: kBottomNavigationBarHeight,
         onDestinationSelected: (index) {
           setState(() {
