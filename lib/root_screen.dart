@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:shop_smart/Screens/cart_screen.dart';
+import 'package:shop_smart/Screens/cart/cart_screen.dart';
 import 'package:shop_smart/Screens/home_screen.dart';
 import 'package:shop_smart/Screens/profile_screen.dart';
 import 'package:shop_smart/Screens/search_screen.dart';
