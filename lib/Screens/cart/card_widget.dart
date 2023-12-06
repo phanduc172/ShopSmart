@@ -2,6 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:shop_smart/Screens/cart/quantity_btn_sheet.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 
 import '../../widgets/title_text.dart';
@@ -23,7 +24,7 @@ class CartWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
                 child: FancyShimmerImage(
                   imageUrl:
-                  'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                      'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
                   height: size.height * 0.2,
                   width: size.height * 0.2,
                 ),
@@ -71,7 +72,20 @@ class CartWidget extends StatelessWidget {
                         ),
                         const Spacer(),
                         OutlinedButton.icon(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await showModalBottomSheet(
+                                backgroundColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30),
+                                    )),
+                                context: context,
+                                builder: (context) {
+                                  return QuantityBottomSheetWidget();
+                                });
+                          },
                           icon: const Icon(IconlyLight.arrowDown2),
                           label: const Text("Qty: 6"),
                           style: OutlinedButton.styleFrom(

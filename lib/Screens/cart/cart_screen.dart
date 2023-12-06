@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shop_smart/Screens/cart/bottom_checkout.dart';
 import 'package:shop_smart/Screens/cart/card_widget.dart';
 import 'package:shop_smart/services/assets_manager.dart';
 import 'package:shop_smart/widgets/empty_bag.dart';
-import 'package:shop_smart/widgets/subtitle_text.dart';
 import 'package:shop_smart/widgets/title_text.dart';
-
-import '../../widgets/app_name_text.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -23,6 +21,7 @@ class CartScreen extends StatelessWidget {
             ),
           )
         : Scaffold(
+            bottomSheet: CartBottomSheetWidget(),
             appBar: AppBar(
               leading: Image.asset(AssetsManager.shoppingCart),
               title: const TitleTextWidget(label: "Cart (6)"),
