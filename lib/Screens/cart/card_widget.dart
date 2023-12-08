@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_smart/Screens/cart/quantity_btn_sheet.dart';
+import 'package:shop_smart/consts/app_constants.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 
 import '../../widgets/title_text.dart';
@@ -23,8 +24,7 @@ class CartWidget extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
                 child: FancyShimmerImage(
-                  imageUrl:
-                      'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                  imageUrl:AppConstants.imageUrl,
                   height: size.height * 0.2,
                   width: size.height * 0.2,
                 ),
