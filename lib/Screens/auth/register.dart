@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shop_smart/widgets/auth/image_picker_widget.dart';
 import '../../consts/validator.dart';
+import '../../services/my_app_functions.dart';
 import '../../widgets/app_name_text.dart';
+import '../../widgets/auth/image_picker_widget.dart';
 import '../../widgets/subtitle_text.dart';
 import '../../widgets/title_text.dart';
 
@@ -29,7 +30,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _formkey = GlobalKey<FormState>();
   XFile? _pickedImage;
-
   @override
   void initState() {
     _nameController = TextEditingController();
@@ -63,6 +63,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _registerFCT() async {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
+  }
+
+  Future<void> localImagePicker() async {
+    final ImagePicker imagePicker = ImagePicker();
+    await MyAppFunctions.imagePickerDialog(
+      context: context,
+      cameraFCT: () async {
+        _pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+        setState(() {});
+      },
+      galleryFCT: () async {
+        _pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+        setState(() {});
+      },
+      removeFCT: () {
+        setState(() {
+          _pickedImage = null;
+        });
+      },
+    );
   }
 
   @override
@@ -105,8 +125,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: size.width * 0.3,
                   child: PickImageWidget(
                     pickedImage: _pickedImage,
-                    function: () {},
+                    function: () async {
+                      await localImagePicker();
+                    },
                   ),
+                ),
+
+                const SizedBox(
+                  height: 30,
                 ),
                 Form(
                   key: _formkey,
@@ -232,22 +258,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(16.0),
-                            backgroundColor: Colors.red,
+                            padding: const EdgeInsets.all(12.0),
+                            // backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                 12.0,
                               ),
                             ),
                           ),
-                          icon: const Icon(
-                            IconlyLight.addUser,
-                            color: Colors.white,
-                          ),
-                          label: const Text(
-                            "Sign up",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          icon: const Icon(IconlyLight.addUser),
+                          label: const Text("Sign up"),
                           onPressed: () async {
                             await _registerFCT();
                           },

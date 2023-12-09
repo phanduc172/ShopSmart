@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_smart/Screens/auth/register.dart';
+import 'package:shop_smart/root_screen.dart';
 import '../../consts/validator.dart';
 import '../../widgets/app_name_text.dart';
 import '../../widgets/auth/google_btn.dart';
@@ -8,6 +9,7 @@ import '../../widgets/subtitle_text.dart';
 import '../../widgets/title_text.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = "/LoginScreen";
   const LoginScreen({super.key});
 
   @override
@@ -222,7 +224,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       fontSize: 16,
                                     ),
                                   ),
-                                  onPressed: () async {},
+                                  onPressed: () async {
+                                    Navigator.of(context)
+                                        .pushNamed(RootScreen.routeName);
+                                  },
                                 ),
                               ),
                             ),

@@ -27,14 +27,17 @@ class MyApp extends StatelessWidget {
           title: 'Shop Smart',
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDartThem, context: context),
-          // home: RootScreen(),
-          home: LoginScreen(),
+          home: RootScreen(),
+          // home: LoginScreen(),
           routes: {
+            RootScreen.routeName: ((context) =>
+            const RootScreen()),
             ProductDetailsScreen.routName: ((context) =>
-                const ProductDetailsScreen()
-            ),
-            RegisterScreen.routName: ((context) => const RegisterScreen()
-            ),
+                const ProductDetailsScreen()),
+            RegisterScreen.routName: ((context) =>
+              const RegisterScreen()),
+            LoginScreen.routeName: ((context) =>
+              const LoginScreen()),
           },
           debugShowCheckedModeBanner: false,
         );
