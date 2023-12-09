@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 
+import '../../Screens/inner_screen/product_details.dart';
 import '../../consts/app_constants.dart';
 
 class LastestArrivalProductsWidget extends StatefulWidget {
@@ -21,8 +22,11 @@ class _LastestArrivalProductsWidgetState
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {
-          print("Todo add the navigate");
+        onTap: () async {
+          await Navigator.pushNamed(
+            context,
+            ProductDetailsScreen.routName,
+          );
         },
         child: SizedBox(
           width: size.width * 0.45,

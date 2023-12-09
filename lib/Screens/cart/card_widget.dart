@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_smart/Screens/cart/quantity_btn_sheet.dart';
 import 'package:shop_smart/consts/app_constants.dart';
+import 'package:shop_smart/widgets/products/heart_btn.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 
 import '../../widgets/title_text.dart';
@@ -53,12 +54,7 @@ class CartWidget extends StatelessWidget {
                                 color: Colors.red,
                               ),
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                IconlyLight.heart,
-                              ),
-                            ),
+                            const HeartButtonWidget(),
                           ],
                         ),
                       ],

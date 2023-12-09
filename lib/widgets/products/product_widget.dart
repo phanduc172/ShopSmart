@@ -5,6 +5,8 @@ import 'package:shop_smart/consts/app_constants.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 import 'package:shop_smart/widgets/title_text.dart';
 
+import '../../Screens/inner_screen/product_details.dart';
+
 class ProductWidget extends StatefulWidget {
   const ProductWidget({super.key});
 
@@ -20,7 +22,7 @@ class _ProductWidgetState extends State<ProductWidget> {
       padding: const EdgeInsets.all(0.0),
       child: GestureDetector(
         onTap: () {
-          print("Todo add the navigate");
+          Navigator.pushNamed(context, ProductDetailsScreen.routName);
         },
         child: Column(
           children: [

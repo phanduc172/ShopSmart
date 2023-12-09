@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_smart/services/assets_manager.dart';
+import 'package:shop_smart/services/my_app_functions.dart';
 import 'package:shop_smart/widgets/app_name_text.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 import '../providers/theme_provider.dart';
@@ -16,7 +17,9 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Image.asset(AssetsManager.shoppingCart),
-        title: const AppNameTextWidget(fontSize: 30,),
+        title: const AppNameTextWidget(
+          fontSize: 30,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -34,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
             Visibility(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 child: Row(
                   children: [
                     Container(
@@ -49,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         image: DecorationImage(
                           image: const NetworkImage(
-                              "https://scontent.fdad1-4.fna.fbcdn.net/v/t39.30808-6/368888831_1405741093316117_1025392992405696762_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEmxWhINpsNSdr80Y-CtUhKM0RNmvTQ_aIzRE2a9ND9ovpNPE6u9U11qU3j48tas8lyTWy22OMimkytXRlJKllk&_nc_ohc=zC3SSIQefTcAX8r5_N3&_nc_ht=scontent.fdad1-4.fna&oh=00_AfDswggms_r5XxqQPqp_xLfabt-lgdoJZcDP0IpL9LxP7A&oe=6573069D"),
+                              "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/368888831_1405741093316117_1025392992405696762_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEmxWhINpsNSdr80Y-CtUhKM0RNmvTQ_aIzRE2a9ND9ovpNPE6u9U11qU3j48tas8lyTWy22OMimkytXRlJKllk&_nc_ohc=v52V1TOZlRAAX8Ue-7K&_nc_ht=scontent.fsgn2-9.fna&oh=00_AfCK4miN2bH8RnujKXJPbaeE50V7lxuULzTLC0xpirI74w&oe=6578F55D"),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -64,8 +67,7 @@ class ProfileScreen extends StatelessWidget {
                         SizedBox(
                           height: 6,
                         ),
-                        SubtitleTextWidge(
-                            label: "Email: phanduc172@gmail.com")
+                        SubtitleTextWidge(label: "Email: phanduc172@gmail.com")
                       ],
                     ),
                   ],
@@ -138,13 +140,23 @@ class ProfileScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       )),
-                  onPressed: () {},
-                  icon: Icon(Icons.login,color: Colors.white,),
-                  label: const Text("Đăng Nhập",
+                  icon: Icon(
+                    Icons.login,
+                    color: Colors.white,
+                  ),
+                  label: const Text(
+                    "Đăng Nhập",
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
+                  onPressed: () async {
+                    await MyAppFunctions.showErrorOrWarningDialog(
+                        context: context,
+                        subtitle: "Are you sure you want to signout",
+                        fct: () {},
+                        isError: false);
+                  },
                 ),
               ),
             ),

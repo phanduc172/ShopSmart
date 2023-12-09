@@ -3,7 +3,6 @@ import '../services/assets_manager.dart';
 import '../widgets/products/product_widget.dart';
 import '../widgets/title_text.dart';
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
-import 'package:card_swiper/card_swiper.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
