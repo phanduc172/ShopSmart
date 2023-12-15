@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import '../../consts/app_constants.dart';
+import '../../providers/cart_provider.dart';
 import '../../providers/products_provider.dart';
 import '../../widgets/app_name_text.dart';
 import '../../widgets/products/heart_btn.dart';
@@ -23,6 +24,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     Size size = MediaQuery.of(context).size;
     final productsProvider = Provider.of<ProductsProvider>(context);
     String? productId = ModalRoute.of(context)?.settings.arguments as String?;
+    final cartProvider = Provider.of<CartProvider>(context);
     final getCurrentProduct = productsProvider.findByProId(productId!);
     return Scaffold(
       appBar: AppBar(
@@ -107,14 +109,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.add_shopping_cart,
+                                    onPressed: () {
+                                      if (cartProvider.isProdinCart(
+                                          productId:
+                                              getCurrentProduct.productId)) {
+                                        return;
+                                      }
+                                      cartProvider.addProductToCart(
+                                          productId:
+                                              getCurrentProduct.productId);
+                                    },
+                                    icon: Icon(
+                                      cartProvider.isProdinCart(
+                                              productId:
+                                                  getCurrentProduct.productId)
+                                          ? Icons.check
+                                          : Icons.add_shopping_cart_outlined,
                                       color: Colors.white,
                                     ),
-                                    label: const Text(
-                                      "Add to cart",
-                                      style: TextStyle(color: Colors.white),
+                                    label: Text(
+                                      cartProvider.isProdinCart(
+                                              productId:
+                                                  getCurrentProduct.productId)
+                                          ? "In cart"
+                                          : "Add to cart",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),

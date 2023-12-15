@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_smart/Screens/cart/cart_screen.dart';
 import 'package:shop_smart/Screens/home_screen.dart';
 import 'package:shop_smart/Screens/profile_screen.dart';
 import 'package:shop_smart/Screens/search_screen.dart';
+import 'package:shop_smart/providers/cart_provider.dart';
 
 class RootScreen extends StatefulWidget {
   static const routeName = "/RootScreen";
@@ -31,6 +33,7 @@ class _RootScreenState extends State<RootScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
@@ -59,7 +62,7 @@ class _RootScreenState extends State<RootScreen> {
           NavigationDestination(
               selectedIcon: Icon(IconlyBold.bag2),
               icon: Badge(
-                label: Text("5"),
+                label: Text(cartProvider.getCartitems.length.toString()),
                 child: Icon(IconlyLight.bag2),
               ),
               label: "Cart"),

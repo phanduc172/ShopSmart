@@ -1,6 +1,10 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_smart/models/product_model.dart';
+import 'package:shop_smart/providers/cart_provider.dart';
+import 'package:shop_smart/widgets/products/heart_btn.dart';
 import 'package:shop_smart/widgets/subtitle_text.dart';
 
 import '../../Screens/inner_screen/product_details.dart';
@@ -19,6 +23,8 @@ class _LastestArrivalProductsWidgetState
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final productsModel = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -26,6 +32,7 @@ class _LastestArrivalProductsWidgetState
           await Navigator.pushNamed(
             context,
             ProductDetailsScreen.routName,
+            arguments: productsModel.productId,
           );
         },
         child: SizedBox(
@@ -37,7 +44,7 @@ class _LastestArrivalProductsWidgetState
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: FancyShimmerImage(
-                    imageUrl: AppConstants.imageUrl,
+                    imageUrl: productsModel.productImage,
                     height: size.height * 0.24,
                     width: size.width * 0.32,
                   ),
@@ -53,27 +60,37 @@ class _LastestArrivalProductsWidgetState
                       height: 5,
                     ),
                     Text(
-                      "Title" * 5,
+                      productsModel.productTitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     FittedBox(
                       child: Row(
                         children: [
+                          const HeartButtonWidget(),
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(IconlyLight.heart),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.add_shopping_cart),
+                            onPressed: () {
+                              if (cartProvider.isProdinCart(
+                                  productId: productsModel.productId)) {
+                                return;
+                              }
+                              cartProvider.addProductToCart(
+                                  productId: productsModel.productId);
+                            },
+                            icon: Icon(
+                              cartProvider.isProdinCart(productId: productsModel.productId)
+                                  ? Icons.check
+                                  : Icons.add_shopping_cart_outlined,
+                              size: 20,
+                              color: Colors.black,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    const FittedBox(
+                    FittedBox(
                       child: SubtitleTextWidge(
-                        label: "100\$",
+                        label: "${productsModel.productPrice}\$",
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
