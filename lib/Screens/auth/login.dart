@@ -1,15 +1,20 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_smart/Screens/auth/register.dart';
 import 'package:shop_smart/root_screen.dart';
 import '../../consts/validator.dart';
+import '../../services/my_app_functions.dart';
 import '../../widgets/app_name_text.dart';
 import '../../widgets/auth/google_btn.dart';
 import '../../widgets/subtitle_text.dart';
 import '../../widgets/title_text.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = "/LoginScreen";
+  static const routeName = "LoginScreen";
   const LoginScreen({super.key});
 
   @override
@@ -25,6 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
   late final FocusNode _passwordFocusNode;
 
   final _formkey = GlobalKey<FormState>();
+  bool _isLoading = false;
+  final auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -50,6 +58,35 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _loginFct() async {
     final isValid = _formkey.currentState!.validate();
     FocusScope.of(context).unfocus();
+    if (isValid) {
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+        await auth.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+        Fluttertoast.showToast(
+          msg: "Đăng nhập thành công!",
+          textColor: Colors.white,
+          toastLength: Toast.LENGTH_LONG,
+          timeInSecForIosWeb: 3,
+        );
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, RootScreen.routeName);
+      } catch (error) {
+        await MyAppFunctions.showErrorOrWarningDialog(
+          context: context,
+          subtitle: error.toString(),
+          fct: () {},
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -206,7 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             Expanded(
                               child: SizedBox(
-                                height: kBottomNavigationBarHeight-10,
+                                height: kBottomNavigationBarHeight - 10,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.all(8.0),

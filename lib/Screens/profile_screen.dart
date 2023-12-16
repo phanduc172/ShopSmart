@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +10,15 @@ import 'package:shop_smart/widgets/subtitle_text.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/title_text.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +44,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             Visibility(
+              visible: true,
               child: Padding(
                 padding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -53,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         image: DecorationImage(
                           image: const NetworkImage(
-                              "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/368888831_1405741093316117_1025392992405696762_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeEmxWhINpsNSdr80Y-CtUhKM0RNmvTQ_aIzRE2a9ND9ovpNPE6u9U11qU3j48tas8lyTWy22OMimkytXRlJKllk&_nc_ohc=v52V1TOZlRAAX8Ue-7K&_nc_ht=scontent.fsgn2-9.fna&oh=00_AfCK4miN2bH8RnujKXJPbaeE50V7lxuULzTLC0xpirI74w&oe=6578F55D"),
+                              "https://images.unsplash.com/photo-1702651249569-1adb008c5fe2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxN3x8fGVufDB8fHx8fA%3D%3D"),
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -133,31 +142,41 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.all(15),
               child: Center(
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      )),
-                  icon: Icon(
-                    Icons.login,
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0), // Điều chỉnh đây để thay đổi kích thước
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 18.0), // Điều chỉnh đây để thay đổi padding
+                  ),
+                  icon: Icon( user == null ?
+                    Icons.login : Icons.logout,
                     color: Colors.white,
                   ),
-                  label: const Text(
-                    "Đăng Nhập",
+                  label: Text(user == null ?
+                    "Đăng Nhập" : "Đăng xuất",
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
                   onPressed: () async {
-                    // await MyAppFunctions.showErrorOrWarningDialog(
-                    //     context: context,
-                    //     subtitle: "Are you sure you want to signout",
-                    //     fct: () {},
-                    //     isError: false);
-                    Navigator.of(context).pushNamed(LoginScreen.routeName);
+                    if(user==null) {
+                      Navigator.of(context).pushNamed(LoginScreen.routeName);
+                    } else {
+                      await MyAppFunctions.showErrorOrWarningDialog(
+                          context: context,
+                          subtitle: "Are you sure you want to signout",
+                          fct: () async {
+                            await FirebaseAuth.instance.signOut();
+                            if(!mounted)
+                              return;
+                            Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                          },
+                          isError: false);
+                    }
                   },
                 ),
               ),
