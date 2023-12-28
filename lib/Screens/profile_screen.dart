@@ -11,7 +11,7 @@ import '../providers/theme_provider.dart';
 import '../widgets/title_text.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -46,8 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Visibility(
               visible: true,
               child: Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   children: [
                     Container(
@@ -75,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: const [
                         TitleTextWidget(label: "Phan Đức"),
                         SizedBox(
-                          height: 6,
+                          height: 5,
                         ),
                         SubtitleTextWidge(label: "Email: phanduc172@gmail.com")
                       ],
@@ -84,52 +83,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 5,
-            ),
+            Divider(),
             Padding(
               padding: const EdgeInsets.all(14.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Divider(),
-                  const TitleTextWidget(label: "General"),
+                  const TitleTextWidget(label: "Tổng quan"),
                   const SizedBox(
                     height: 10,
                   ),
                   CustomListTitle(
                     imagePath: AssetsManager.orderSvg,
-                    text: "All Orders",
+                    text: "Tất cả đơn hàng",
                     function: () {},
                   ),
                   CustomListTitle(
                     imagePath: AssetsManager.wishlistSvg,
-                    text: "Wishlist",
+                    text: "Danh sách yêu thích",
                     function: () {},
                   ),
                   CustomListTitle(
                     imagePath: AssetsManager.recent,
-                    text: "Viewed Recently",
+                    text: "Đã xem gần đây",
                     function: () {},
                   ),
                   CustomListTitle(
                     imagePath: AssetsManager.address,
-                    text: "Adress",
+                    text: "Địa chỉ",
                     function: () {},
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Divider(),
-                  const TitleTextWidget(label: "Settings"),
+                  const TitleTextWidget(label: "Cài đặt"),
                   const SizedBox(
                     height: 10,
                   ),
                   SwitchListTile(
                       secondary: Image.asset(AssetsManager.theme),
                       title: Text(themeProvider.getIsDartThem
-                          ? "Dark Mode"
-                          : "Light Mode"),
+                          ? "Chế độ tối"
+                          : "Chế độ sáng"),
                       value: themeProvider.getIsDartThem,
                       onChanged: (value) {
                         themeProvider.setDarkTheme(value);

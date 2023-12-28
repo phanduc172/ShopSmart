@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              TitleTextWidget(label: "Last arrival"),
+              TitleTextWidget(label: "Sản phẩm mới nhất"),
               const SizedBox(
                 height: 10,
               ),
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              TitleTextWidget(label: "Categories"),
+              TitleTextWidget(label: "Danh mục"),
               const SizedBox(
                 height: 10,
               ),

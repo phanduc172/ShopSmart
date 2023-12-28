@@ -93,6 +93,7 @@ class _LastestArrivalProductsWidgetState
                         label: "${productsModel.productPrice}\$",
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
+                        fontSize: 15,
                       ),
                     ),
                   ],

@@ -37,8 +37,22 @@ android {
         jvmTarget = '1.8'
     }
 
+//    sourceSets {
+//        main.java.srcDirs += 'src/main/kotlin'
+//    }
+
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main {
+            java.srcDirs += 'src/main/kotlin'
+            assets.srcDirs += [
+                    'src/main/assets',
+                    'src/main/assets/images',
+                    'src/main/assets/images/profile',
+                    'src/main/assets/images/bag',
+                    'src/main/assets/images/banners',
+                    'src/main/assets/images/categories',
+            ]
+        }
     }
 
     defaultConfig {
@@ -46,11 +60,11 @@ android {
         applicationId "com.example.shop_smart"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+//        minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-//        minSdkVersion 21
+        minSdkVersion 21
     }
 
     buildTypes {
